@@ -4,6 +4,20 @@ api:
     tag: latest
   envFromSecret: epic-api-secret
 
+  health:
+    livenessProbe:
+      enabled: true
+      path: /health/live
+      port: 8000
+      initialDelaySeconds: 10
+      periodSeconds: 10
+    readinessProbe:
+      enabled: true
+      path: /health/ready
+      port: 8000
+      initialDelaySeconds: 5
+      periodSeconds: 10
+
 postgresql:
   enabled: true
   auth:

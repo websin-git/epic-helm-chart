@@ -22,3 +22,19 @@ spec:
           envFrom:
             - secretRef:
                 name: {{ .Values.api.envFromSecret }}
+          {{- if .Values.api.health.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.api.health.livenessProbe.path }}
+              port: {{ .Values.api.health.livenessProbe.port }}
+            initialDelaySeconds: {{ .Values.api.health.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.api.health.livenessProbe.periodSeconds }}
+          {{- end }}
+          {{- if .Values.api.health.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.api.health.readinessProbe.path }}
+              port: {{ .Values.api.health.readinessProbe.port }}
+            initialDelaySeconds: {{ .Values.api.health.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.api.health.readinessProbe.periodSeconds }}
+          {{- end }}
