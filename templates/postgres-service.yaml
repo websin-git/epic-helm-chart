@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgres
+  name: {{ include "epic-crm.fullname" . }}-postgres
   labels:
     app: {{ include "epic-crm.name" . }}-postgres
 spec:
