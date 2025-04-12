@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "epic-crm.fullname" . }}-postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "epic-crm.name" . }}-postgres
+  template:
+    metadata:
+      labels:
+        app: {{ include "epic-crm.name" . }}-postgres
+    spec:
+      containers:
+          - name: postgres
+            image: postgres:15
+            ports:
+              - containerPort: 5432
+            env:
+              - name: POSTGRES_DB
+                value: {{ .Values.postgresql.auth.database | quote }}
+              - name: POSTGRES_USER
+                value: {{ .Values.postgresql.auth.username | quote }}
+              - name: POSTGRES_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: {{ .Values.postgresql.auth.existingSecret }}
+                    key: password
+            volumeMounts:
+              - name: postgres-storage
+                mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: postgres-storage
+          emptyDir: {}

@@ -1,0 +1,33 @@
+api:
+  image:
+    repository: ghcr.io/websin-git/epicrm-backend/epic-api
+    tag: latest
+  envFromSecret: epic-api-secret
+
+postgresql:
+  enabled: true
+  auth:
+    existingSecret: epic-db-secret
+
+service:
+  type: ClusterIP
+  port: 8000
+
+ingress:
+  enabled: true
+  className: traefik
+  host: api.example.com
+  tlsSecret: epic-api-tls
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+
+
+replicaCount: 1  # How many pods to start for scaling
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi

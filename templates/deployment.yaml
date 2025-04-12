@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "epic-crm.fullname" . }}-api
+  labels:
+    app: {{ include "epic-crm.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount | default 1 }}
+  selector:
+    matchLabels:
+      app: {{ include "epic-crm.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "epic-crm.name" . }}
+    spec:
+      containers:
+        - name: api
+          image: "{{ .Values.api.image.repository }}:{{ .Values.api.image.tag }}"
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: {{ .Values.api.envFromSecret }}

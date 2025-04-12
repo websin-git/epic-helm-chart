@@ -1,0 +1,14 @@
+apiVersion: v2
+name: epicrm
+description: A Helm chart for deploying the EpicRM backend
+type: application
+version: 0.1.0
+appVersion: "0.0.1"
+
+maintainers:
+  - name: WebSin
+    email: info@websin.de
+    url: https://websin.de
+
+keywords:
+  - crm
