@@ -4,9 +4,9 @@ kind: Ingress
 metadata:
   name: {{ include "epicrm.api.fullname" . }}
   annotations:
-    {{- with .Values.ingress.annotations }}
-  {{ toYaml . | indent 4 }}
-    {{- end }}
+{{- with .Values.ingress.annotations }}
+{{ toYaml . | indent 4 }}
+{{- end }}
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   tls:
