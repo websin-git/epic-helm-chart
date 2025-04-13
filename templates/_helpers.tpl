@@ -1,14 +1,11 @@
-{{/* Define the chart name */}}
-{{- define "epic-crm.name" -}}
+{{- define "epicrm.name" -}}
 epicrm
 {{- end }}
 
-{{/* Define the chart full name (with release name) */}}
-{{- define "epic-crm.fullname" -}}
-{{ .Release.Name }}-epicrm
+{{- define "epicrm.api.fullname" -}}
+epicrm-api
 {{- end }}
 
-{{/* Define the chart label */}}
-{{- define "epic-crm.chart" -}}
-{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+{{- define "epicrm.postgres.fullname" -}}
+epicrm-postgres
 {{- end }}

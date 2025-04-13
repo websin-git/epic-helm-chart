@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "epic-crm.fullname" . }}-api
+  name: {{ include "epicrm.api.fullname" . }}
   labels:
-    app: {{ include "epic-crm.name" . }}
+    app: {{ include "epicrm.api.fullname" . }}
 spec:
   replicas: {{ .Values.replicaCount | default 1 }}
   selector:
     matchLabels:
-      app: {{ include "epic-crm.name" . }}
+      app: {{ include "epicrm.api.fullname" . }}
   template:
     metadata:
       labels:
-        app: {{ include "epic-crm.name" . }}
+        app: {{ include "epicrm.api.fullname" . }}
     spec:
       containers:
         - name: api

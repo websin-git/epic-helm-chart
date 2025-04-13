@@ -2,11 +2,11 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "epic-crm.fullname" . }}-api
+  name: {{ include "epicrm.api.fullname" . }}
   annotations:
-{{- with .Values.ingress.annotations }}
-{{ toYaml . | indent 4 }}
-{{- end }}
+    {{- with .Values.ingress.annotations }}
+    {{ toYaml . | indent 4 }}
+    {{- end }}
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   tls:
@@ -21,7 +21,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ include "epic-crm.fullname" . }}-api
+                name: {{ include "epicrm.api.fullname" . }}
                 port:
                   number: {{ .Values.service.port }}
 {{- end }}

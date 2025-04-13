@@ -1,13 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "epic-crm.fullname" . }}-postgres
+  name: {{ include "epicrm.postgres.fullname" . }}
   labels:
-    app: {{ include "epic-crm.name" . }}-postgres
+    app: {{ include "epicrm.postgres.fullname" . }}
 spec:
   type: ClusterIP
   ports:
     - port: 5432
       targetPort: 5432
+      protocol: TCP
+      name: postgres
   selector:
-    app: {{ include "epic-crm.name" . }}-postgres
+    app: {{ include "epicrm.postgres.fullname" . }}
